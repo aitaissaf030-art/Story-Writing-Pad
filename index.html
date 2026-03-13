@@ -1,37 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Converter Pro+</title>
+
 <style>
 
-body{
+*{
+box-sizing:border-box;
 margin:0;
+padding:0;
+}
+
+body{
 font-family:'Segoe UI', sans-serif;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background: linear-gradient(-45deg, #667eea, #764ba2, #43cea2, #185a9d);
+overflow:hidden;
+background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c1c);
 background-size: 400% 400%;
-animation: gradientBG 12s ease infinite;
+animation: gradientMove 12s ease infinite;
 }
 
-@keyframes gradientBG {
-0% { background-position: 0% 50%; }
-50% { background-position: 100% 50%; }
-100% { background-position: 0% 50%; }
+/* Animated Background */
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* Floating glow circles */
+body::before,
+body::after{
+content:"";
+position:absolute;
+width:400px;
+height:400px;
+border-radius:50%;
+background:rgba(0,255,255,0.2);
+filter:blur(120px);
+animation: float 10s infinite alternate ease-in-out;
+}
+
+body::after{
+background:rgba(255,0,255,0.2);
+top:60%;
+left:60%;
+animation-delay:3s;
+}
+
+@keyframes float{
+0%{transform:translate(0,0);}
+100%{transform:translate(50px,-50px);}
 }
 
 .container{
-background: rgba(255,255,255,0.12);
-backdrop-filter: blur(18px);
-padding: 25px;
-border-radius: 20px;
-width: 95%;
-max-width: 420px;
-box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-color: white;
+position:relative;
+width:95%;
+max-width:420px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+padding:25px;
+border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,0.6);
+color:white;
+z-index:10;
 }
 
 h2{
 text-align:center;
 margin-bottom:20px;
+font-weight:600;
+letter-spacing:1px;
 }
 
 select,input{
@@ -41,9 +84,10 @@ margin:8px 0;
 border-radius:12px;
 border:none;
 font-size:15px;
+outline:none;
 }
 
-input, select{
+input,select{
 background:white;
 color:black;
 }
@@ -54,15 +98,22 @@ padding:12px;
 margin-top:8px;
 border:none;
 border-radius:12px;
-background:linear-gradient(to right,#ff512f,#dd2476);
+background:linear-gradient(45deg,#00f5ff,#ff00ff);
 color:white;
 font-size:16px;
 cursor:pointer;
 transition:0.3s;
+box-shadow:0 0 15px rgba(0,255,255,0.7);
 }
 
 button:hover{
-transform:scale(1.03);
+transform:scale(1.05);
+box-shadow:0 0 25px rgba(255,0,255,0.9);
+}
+
+.swap{
+background:linear-gradient(45deg,#ff512f,#dd2476);
+box-shadow:0 0 15px rgba(255,81,47,0.8);
 }
 
 .result{
@@ -72,4 +123,151 @@ font-weight:600;
 text-align:center;
 }
 
+.footer{
+margin-top:15px;
+font-size:12px;
+text-align:center;
+opacity:0.7;
+}
+
 </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Unit Converter Pro+</h2>
+
+<select id="category" onchange="updateUnits()">
+<option value="length">Length</option>
+<option value="weight">Weight</option>
+<option value="temperature">Temperature</option>
+<option value="speed">Speed</option>
+<option value="time">Time</option>
+<option value="area">Area</option>
+</select>
+
+<input type="number" id="inputValue" placeholder="Enter value">
+
+<select id="fromUnit"></select>
+<select id="toUnit"></select>
+
+<button onclick="convert()">Convert</button>
+<button class="swap" onclick="swapUnits()">Swap Units</button>
+
+<div class="result" id="result"></div>
+
+<div class="footer">
+Fast • Accurate • Offline
+</div>
+
+</div>
+
+<script>
+
+const data = {
+
+length:{
+Meter:1,
+Kilometer:1000,
+Centimeter:0.01,
+Millimeter:0.001,
+Mile:1609.34,
+Yard:0.9144
+},
+
+weight:{
+Kilogram:1,
+Gram:0.001,
+Pound:0.453592,
+Ounce:0.0283495
+},
+
+speed:{
+"Meter/Second":1,
+"Kilometer/Hour":0.277778,
+"Mile/Hour":0.44704
+},
+
+time:{
+Second:1,
+Minute:60,
+Hour:3600,
+Day:86400
+},
+
+area:{
+"Square Meter":1,
+"Square Kilometer":1000000,
+Hectare:10000,
+Acre:4046.86
+},
+
+temperature:["Celsius","Fahrenheit","Kelvin"]
+
+};
+
+function updateUnits(){
+let cat=document.getElementById("category").value;
+let from=document.getElementById("fromUnit");
+let to=document.getElementById("toUnit");
+
+from.innerHTML="";
+to.innerHTML="";
+
+if(cat==="temperature"){
+data.temperature.forEach(u=>{
+from.innerHTML+=`<option>${u}</option>`;
+to.innerHTML+=`<option>${u}</option>`;
+});
+}else{
+for(let unit in data[cat]){
+from.innerHTML+=`<option>${unit}</option>`;
+to.innerHTML+=`<option>${unit}</option>`;
+}
+}
+}
+
+updateUnits();
+
+function convert(){
+let cat=document.getElementById("category").value;
+let val=parseFloat(document.getElementById("inputValue").value);
+let from=document.getElementById("fromUnit").value;
+let to=document.getElementById("toUnit").value;
+
+if(isNaN(val)){
+document.getElementById("result").innerText="Enter valid number";
+return;
+}
+
+let result;
+
+if(cat==="temperature"){
+if(from==="Celsius"&&to==="Fahrenheit") result=(val*9/5)+32;
+else if(from==="Fahrenheit"&&to==="Celsius") result=(val-32)*5/9;
+else if(from==="Celsius"&&to==="Kelvin") result=val+273.15;
+else if(from==="Kelvin"&&to==="Celsius") result=val-273.15;
+else if(from==="Fahrenheit"&&to==="Kelvin") result=((val-32)*5/9)+273.15;
+else if(from==="Kelvin"&&to==="Fahrenheit") result=((val-273.15)*9/5)+32;
+else result=val;
+}else{
+result=val * data[cat][from] / data[cat][to];
+}
+
+document.getElementById("result").innerText="Result: "+result.toFixed(6);
+}
+
+function swapUnits(){
+let from=document.getElementById("fromUnit");
+let to=document.getElementById("toUnit");
+let temp=from.value;
+from.value=to.value;
+to.value=temp;
+}
+
+</script>
+
+</body>
+</html>
