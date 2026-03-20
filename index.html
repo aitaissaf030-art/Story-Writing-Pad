@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Hajj & Umrah Guide – Sacred Steps</title>
+    <title>Morning & Evening Adhkar – Daily Remembrances</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -14,252 +14,274 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #f8f5e8 0%, #e9e2cf 100%);
-            color: #2c3e2f;
+            background: linear-gradient(145deg, #fef9e6 0%, #f2ecdb 100%);
+            color: #2e3b2c;
             padding: 24px 16px;
         }
         .container {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 0 auto;
         }
         /* header */
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
         .header h1 {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #1f5e3a, #2c7a4a);
+            background: linear-gradient(135deg, #2b6e3c, #4a8c5a);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             letter-spacing: -0.5px;
         }
         .header h1 i {
-            color: #d4af37;
             background: none;
-            -webkit-text-fill-color: #d4af37;
+            -webkit-text-fill-color: #c7a23b;
+            color: #c7a23b;
         }
         .header .sub {
             font-size: 1rem;
-            color: #5e6b4d;
-            background: rgba(212, 175, 55, 0.2);
+            color: #6c7a5a;
+            background: rgba(199, 162, 59, 0.2);
             display: inline-block;
             padding: 6px 24px;
             border-radius: 40px;
             margin-top: 12px;
             backdrop-filter: blur(4px);
         }
-        /* section titles */
-        .section-title {
-            font-size: 1.9rem;
-            font-weight: 700;
-            margin: 40px 0 20px 0;
-            border-left: 6px solid #d4af37;
-            padding-left: 18px;
-            color: #1e4a2f;
+        /* tab navigation */
+        .tabs {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 40px;
+            cursor: pointer;
+            color: #5a6b4a;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .tab-btn i {
+            margin-right: 8px;
+        }
+        .tab-btn.active {
+            background: #c7a23b;
+            color: #2e3b2c;
+            box-shadow: 0 4px 12px rgba(199, 162, 59, 0.4);
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active-content {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* cards */
         .card {
-            background: rgba(255, 255, 245, 0.9);
+            background: rgba(255, 255, 245, 0.95);
             border-radius: 28px;
             padding: 24px;
-            margin-bottom: 28px;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e6dbbc;
-            transition: transform 0.2s ease, box-shadow 0.2s;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e3d8be;
+            transition: transform 0.2s;
         }
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
         }
-        .step-title {
-            font-size: 1.5rem;
+        .dua-title {
+            font-size: 1.25rem;
             font-weight: 700;
-            color: #2c7a4a;
+            color: #2b6e3c;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
-        .step-title i {
-            color: #d4af37;
-            font-size: 1.6rem;
+        .dua-title i {
+            color: #c7a23b;
+            font-size: 1.2rem;
         }
         .arabic {
             font-family: 'Amiri', serif;
-            font-size: 1.6rem;
-            line-height: 1.6;
-            color: #1c4b2d;
-            margin: 12px 0 6px;
+            font-size: 1.7rem;
+            line-height: 1.5;
+            color: #1d4d2a;
+            margin: 12px 0 8px;
         }
         .transliteration {
             font-style: italic;
-            color: #5e6b4d;
-            border-left: 3px solid #d4af37;
+            color: #6c7a5a;
+            border-left: 3px solid #c7a23b;
             padding-left: 15px;
-            margin: 10px 0;
+            margin: 12px 0;
+            font-size: 0.95rem;
         }
         .translation {
-            background: #fef9e6;
-            padding: 12px 18px;
+            background: #fef7e0;
+            padding: 12px 16px;
             border-radius: 20px;
             margin-top: 12px;
-            color: #2f4d2d;
+            color: #3c5536;
             font-weight: 500;
+            font-size: 0.95rem;
         }
-        .pill {
-            background: #2c7a4a20;
-            color: #1f5e3a;
-            display: inline-block;
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        .two-columns {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-        .two-columns .card {
-            flex: 1;
-            min-width: 260px;
+        .reference {
+            font-size: 0.75rem;
+            color: #a0936e;
+            margin-top: 12px;
+            text-align: right;
         }
         .footer {
             text-align: center;
-            margin-top: 48px;
+            margin-top: 40px;
             padding-top: 20px;
-            border-top: 1px solid #d4c6a5;
-            color: #5f6b4d;
-            font-size: 0.85rem;
+            border-top: 1px solid #ddd0b0;
+            color: #6c7a5a;
+            font-size: 0.8rem;
         }
-        @media (max-width: 700px) {
-            .header h1 { font-size: 2rem; }
-            .section-title { font-size: 1.6rem; }
-            .arabic { font-size: 1.3rem; }
+        @media (max-width: 550px) {
+            .arabic { font-size: 1.4rem; }
+            .tab-btn { padding: 6px 16px; font-size: 0.9rem; }
+            .header h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1><i class="fas fa-kaaba"></i> Hajj & Umrah <br> <span style="font-size: 1.2rem;">Sacred Journey Guide</span></h1>
-        <div class="sub"><i class="fas fa-hands-praying"></i> لبيك اللهم لبيك</div>
+        <h1><i class="fas fa-pray"></i> Morning & Evening Adhkar</h1>
+        <div class="sub">Remembrances of Allah for every moment</div>
     </div>
 
-    <!-- Introduction -->
-    <div class="card">
-        <div class="step-title"><i class="fas fa-star-of-life"></i> The Journey of a Lifetime</div>
-        <p>Hajj and Umrah are pilgrimages to Makkah, a profound act of worship. This guide provides essential steps, duas, and rituals to help you perform them with understanding and devotion. May Allah accept your efforts.</p>
-        <div class="arabic" style="font-size:1.3rem">وَلِلَّهِ عَلَى النَّاسِ حِجُّ الْبَيْتِ مَنِ اسْتَطَاعَ إِلَيْهِ سَبِيلًا</div>
-        <div class="translation">“And pilgrimage to the House is a duty owed to Allah by all people who are able to undertake it.” (Qur’an 3:97)</div>
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="morning"><i class="fas fa-sun"></i> Morning Adhkar</button>
+        <button class="tab-btn" data-tab="evening"><i class="fas fa-moon"></i> Evening Adhkar</button>
+        <button class="tab-btn" data-tab="daily"><i class="fas fa-clock"></i> General Daily</button>
     </div>
 
-    <!-- UMRAH SECTION -->
-    <div class="section-title"><i class="fas fa-mosque"></i> Umrah – The Minor Pilgrimage</div>
-    <div class="card">
-        <div class="step-title"><i class="fas fa-check-circle"></i> 1. Entering Ihram</div>
-        <div>At the miqat, make the intention for Umrah, wear the ihram garments, and recite the Talbiyah:</div>
-        <div class="arabic">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ لَا شَرِيكَ لَكَ</div>
-        <div class="transliteration">Labbayka Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna l-ḥamda wa n-ni‘mata laka wa l-mulk, lā sharīka lak.</div>
-        <div class="translation">“Here I am, O Allah, here I am. You have no partner, here I am. All praise and blessings are Yours, and all sovereignty. You have no partner.”</div>
-    </div>
-
-    <div class="card">
-        <div class="step-title"><i class="fas fa-sync-alt"></i> 2. Tawaf (Circling the Kaaba)</div>
-        <div>Upon entering Masjid al-Haram, perform Tawaf: seven circuits around the Kaaba, starting from the Black Stone. Recite any duas, especially between the Yemeni Corner and Black Stone:</div>
-        <div class="arabic">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div>
-        <div class="transliteration">Rabbanā ātinā fī d-dunyā ḥasanatan wa fī l-ākhirati ḥasanatan wa qinā ‘adhāba n-nār.</div>
-        <div class="translation">“Our Lord, grant us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.” (2:201)</div>
-    </div>
-
-    <div class="card">
-        <div class="step-title"><i class="fas fa-hiking"></i> 3. Sa’i (Walking between Safa & Marwah)</div>
-        <div>After Tawaf, pray at Maqam Ibrahim, drink Zamzam water, then proceed to Safa. Walk seven laps between Safa and Marwah. On Safa, recite:</div>
-        <div class="arabic">إِنَّ الصَّفَا وَالْمَرْوَةَ مِن شَعَائِرِ اللَّهِ</div>
-        <div class="transliteration">Inna ṣ-ṣafā wa l-marwata min sha‘ā’irillāh.</div>
-        <div class="translation">“Indeed, Safa and Marwah are among the symbols of Allah.” (2:158)</div>
-        <div>Make supplications while walking. Upon completing Sa’i, men may shave or trim hair (taqsir); women trim a fingertip’s length.</div>
-    </div>
-
-    <!-- HAJJ OVERVIEW + key steps -->
-    <div class="section-title"><i class="fas fa-moon"></i> Hajj – The Major Pilgrimage</div>
-    <div class="card">
-        <div class="step-title"><i class="fas fa-calendar-alt"></i> Days of Hajj (8–13 Dhul Hijjah)</div>
-        <p>Hajj includes Umrah rituals plus additional rites. Below are the essential days:</p>
-        <ul style="margin-left: 1.5rem; margin-top: 8px;">
-            <li><strong>8th Dhul Hijjah (Yawm at-Tarwiyah):</strong> Enter Ihram, head to Mina.</li>
-            <li><strong>9th Dhul Hijjah (Arafah):</strong> Stand at Arafah – the most important day. Make abundant dua.</li>
-            <li><strong>10th Dhul Hijjah (Eid al-Adha):</strong> Stone Jamarat al-Aqabah, sacrifice, shave/trim, then Tawaf al-Ifadah.</li>
-            <li><strong>11–13th:</strong> Stone the three jamarat in Mina, then final Tawaf al-Wada (farewell tawaf).</li>
-        </ul>
-    </div>
-
-    <div class="two-columns">
+    <!-- MORNING SECTION -->
+    <div id="morning" class="tab-content active-content">
+        <!-- Adhkar cards will be injected via JS or static; I'll use static for simplicity but ensure consistency -->
         <div class="card">
-            <div class="step-title"><i class="fas fa-mountain"></i> Day of Arafah</div>
-            <div class="arabic">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ</div>
-            <div class="transliteration">Allāhumma innī as’aluka l-‘afwa wa l-‘āfiyah fī d-dunyā wa l-ākhirah.</div>
-            <div class="translation">“O Allah, I ask You for pardon and well‑being in this world and the Hereafter.”</div>
-            <div class="pill"><i class="fas fa-hadith"></i> Best dua: “Lā ilāha illallāh wahdahu…”</div>
+            <div class="dua-title"><i class="fas fa-star-of-life"></i> Ayat-ul-Kursi (once)</div>
+            <div class="arabic">اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ</div>
+            <div class="transliteration">Allāhu lā ilāha illā hū, al-ḥayyu l-qayyūm, lā ta’khudhuhū sinatun wa lā nawm, lahū mā fī s-samāwāti wa mā fī l-arḍ, man dhā lladhī yashfa‘u ‘indahū illā bi-idhnih, ya‘lamu mā bayna aydīhim wa mā khalfahum, wa lā yuḥīṭūna bi-shay’in min ‘ilmihī illā bi-mā shā’, wasi‘a kursiyyuhu s-samāwāti wa l-arḍ, wa lā ya’ūduhū ḥifẓuhumā, wa huwa l-‘aliyyu l-‘aẓīm.</div>
+            <div class="translation">“Allah – there is no deity except Him, the Ever‑Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth...” (Qur’an 2:255)</div>
+            <div class="reference">Protection from morning till evening</div>
         </div>
+
         <div class="card">
-            <div class="step-title"><i class="fas fa-hand-peace"></i> Stoning the Jamarat</div>
-            <div>On the days of Tashreeq, throw seven pebbles at each of the three pillars (starting with the smallest). Recite “Allahu Akbar” with each throw.</div>
-            <div class="arabic">بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ رَغْمًا لِلشَّيْطَانِ</div>
-            <div class="transliteration">Bismillāh wa Allāhu akbar, raghman li-sh-shayṭān.</div>
-            <div class="translation">“In the name of Allah, Allah is the Greatest, in spite of Satan.”</div>
+            <div class="dua-title"><i class="fas fa-shield-alt"></i> Morning Protection (3 times)</div>
+            <div class="arabic">بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ</div>
+            <div class="transliteration">Bismillāhi lladhī lā yaḍurru ma‘a smihī shay’un fī l-arḍi wa lā fī s-samā’i wa huwa s-samī‘u l-‘alīm.</div>
+            <div class="translation">“In the Name of Allah, with Whose Name nothing is harmed on earth nor in the heavens, and He is the All‑Hearing, the All‑Knowing.” (Three times)</div>
+            <div class="reference">[Abu Dawud]</div>
+        </div>
+
+        <div class="card">
+            <div class="dua-title"><i class="fas fa-hands-helping"></i> Seeking Forgiveness (3 times)</div>
+            <div class="arabic">أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ</div>
+            <div class="transliteration">Astaghfirullāh wa atūbu ilayh.</div>
+            <div class="translation">“I seek forgiveness from Allah and repent to Him.” (Three times)</div>
+        </div>
+
+        <div class="card">
+            <div class="dua-title"><i class="fas fa-check-circle"></i> Sufficient for the Day (once)</div>
+            <div class="arabic">حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ ۖ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ</div>
+            <div class="transliteration">Ḥasbiya Allāhu lā ilāha illā huw, ‘alayhi tawakkaltu wa huwa rabbu l-‘arshi l-‘aẓīm.</div>
+            <div class="translation">“Allah is sufficient for me. There is no deity except Him. I have placed my trust in Him, and He is the Lord of the Mighty Throne.” (Seven times)</div>
+            <div class="reference">[Abu Dawud]</div>
         </div>
     </div>
 
-    <!-- Important Duas -->
-    <div class="section-title"><i class="fas fa-book-quran"></i> Essential Duas for Pilgrimage</div>
-    
-    <div class="card">
-        <div class="step-title"><i class="fas fa-tshirt"></i> When Entering Ihram (after Talbiyah)</div>
-        <div class="arabic">اللَّهُمَّ إِنِّي أُرِيدُ الْعُمْرَةَ فَيَسِّرْهَا لِي وَتَقَبَّلْهَا مِنِّي</div>
-        <div class="transliteration">Allāhumma innī urīdu l-‘umrata fa yassirhā lī wa taqabbalhā minnī.</div>
-        <div class="translation">“O Allah, I intend to perform Umrah, so make it easy for me and accept it from me.”</div>
+    <!-- EVENING SECTION -->
+    <div id="evening" class="tab-content">
+        <div class="card">
+            <div class="dua-title"><i class="fas fa-moon"></i> Evening Protection</div>
+            <div class="arabic">أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ</div>
+            <div class="transliteration">Amsaynā wa amsa l-mulku lillāh, wal-ḥamdu lillāh, lā ilāha illallāh waḥdahū lā sharīka lah.</div>
+            <div class="translation">“We have reached the evening and at this very time the sovereignty belongs to Allah, and praise is for Allah. There is no deity except Allah, alone, without partner.”</div>
+        </div>
+        <div class="card">
+            <div class="dua-title"><i class="fas fa-leaf"></i> Three Quls (Ikhlas, Falaq, Nas)</div>
+            <div class="arabic">قُلْ هُوَ اللَّهُ أَحَدٌ ...</div>
+            <div class="transliteration">Surat al-Ikhlāṣ, al-Falaq, an-Nās – three times each.</div>
+            <div class="translation">Recite Surah al-Ikhlas, al-Falaq, an-Nās three times in the evening for protection.</div>
+            <div class="reference">[Sunan an-Nasa’i]</div>
+        </div>
+        <div class="card">
+            <div class="dua-title"><i class="fas fa-praying-hands"></i> Evening Supplication</div>
+            <div class="arabic">اللَّهُمَّ بِكَ أَمْسَيْنَا وَبِكَ أَصْبَحْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ الْمَصِيرُ</div>
+            <div class="transliteration">Allāhumma bika amsaynā wa bika aṣbaḥnā, wa bika naḥyā wa bika namūtu wa ilayka l-maṣīr.</div>
+            <div class="translation">“O Allah, by You we enter the evening and by You we enter the morning, by You we live and by You we die, and to You is the final return.”</div>
+        </div>
     </div>
 
-    <div class="card">
-        <div class="step-title"><i class="fas fa-eye"></i> When Seeing the Kaaba</div>
-        <div class="arabic">اللَّهُمَّ زِدْ هَذَا الْبَيْتَ تَشْرِيفًا وَتَعْظِيمًا وَتَكْرِيمًا وَمَهَابَةً</div>
-        <div class="transliteration">Allāhumma zid hādhā l-bayta tashrīfan wa ta‘ẓīman wa takrīman wa mahābah.</div>
-        <div class="translation">“O Allah, increase this House in honor, greatness, respect and awe.”</div>
-    </div>
-
-    <div class="card">
-        <div class="step-title"><i class="fas fa-water"></i> Drinking Zamzam</div>
-        <div class="arabic">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا وَاسِعًا وَشِفَاءً مِنْ كُلِّ دَاءٍ</div>
-        <div class="transliteration">Allāhumma innī as’aluka ‘ilman nāfi‘an wa rizqan wāsi‘an wa shifā’an min kulli dā’.</div>
-        <div class="translation">“O Allah, I ask You for beneficial knowledge, abundant provision, and healing from every disease.”</div>
-    </div>
-
-    <div class="card">
-        <div class="step-title"><i class="fas fa-people-arrows"></i> For Sa’i between Safa & Marwah</div>
-        <div class="arabic">رَبِّ اغْفِرْ وَارْحَمْ وَتَجَاوَزْ عَمَّا تَعْلَمُ إِنَّكَ أَنْتَ الْأَعَزُّ الْأَكْرَمُ</div>
-        <div class="transliteration">Rabbighfir warḥam wa tajāwaz ‘ammā ta‘lam, innaka anta l-a‘azzu l-akram.</div>
-        <div class="translation">“My Lord, forgive and have mercy, and overlook what You know. Indeed, You are the Most Mighty, the Most Generous.”</div>
-    </div>
-
-    <!-- Additional Tips -->
-    <div class="card">
-        <div class="step-title"><i class="fas fa-lightbulb"></i> Important Reminders</div>
-        <ul style="margin-left: 1.2rem;">
-            <li>Maintain purity of intention – seek Allah’s pleasure alone.</li>
-            <li>Avoid arguing, foul language, and worldly distractions during pilgrimage.</li>
-            <li>For Hajj, ensure you learn the precise days and rulings from a trusted scholar.</li>
-            <li>Men must keep ihram garments (two white cloths) untailored; women wear modest clothing with face uncovered.</li>
-        </ul>
+    <!-- GENERAL DAILY ADHKAR -->
+    <div id="daily" class="tab-content">
+        <div class="card">
+            <div class="dua-title"><i class="fas fa-bed"></i> Before Sleeping</div>
+            <div class="arabic">بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا</div>
+            <div class="transliteration">Bismika Allāhumma amūtu wa aḥyā.</div>
+            <div class="translation">“In Your name, O Allah, I die and I live.”</div>
+        </div>
+        <div class="card">
+            <div class="dua-title"><i class="fas fa-utensils"></i> Before Eating</div>
+            <div class="arabic">بِسْمِ اللَّهِ وَعَلَى بَرَكَةِ اللَّهِ</div>
+            <div class="transliteration">Bismillāhi wa ‘alā barakati llāh.</div>
+            <div class="translation">“In the name of Allah and upon the blessings of Allah.”</div>
+        </div>
+        <div class="card">
+            <div class="dua-title"><i class="fas fa-door-open"></i> Leaving the House</div>
+            <div class="arabic">بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ</div>
+            <div class="transliteration">Bismillāhi tawakkaltu ‘alallāh, lā ḥawla wa lā quwwata illā billāh.</div>
+            <div class="translation">“In the name of Allah, I place my trust in Allah. There is no might nor power except with Allah.”</div>
+        </div>
+        <div class="card">
+            <div class="dua-title"><i class="fas fa-smile"></i> When Sneezing</div>
+            <div class="arabic">الْحَمْدُ لِلَّهِ</div>
+            <div class="transliteration">Al-ḥamdu lillāh.</div>
+            <div class="translation">“All praise is for Allah.” The response: “Yarḥamukallāh” (May Allah have mercy on you).</div>
+        </div>
     </div>
 
     <div class="footer">
-        <i class="fas fa-pray"></i> May Allah accept your worship and grant you a blessed pilgrimage. <br>
-        <span style="font-size:0.75rem;">Based on authentic sources. Always consult scholars for detailed rulings.</span>
+        <i class="fas fa-book-open"></i> Based on authentic Hadith & Qur’an. Recite with sincerity and reflection. <br>
+        <span style="font-size:0.7rem;">Morning adhkar from after Fajr until sunrise, evening adhkar from ‘Asr until sunset.</span>
     </div>
 </div>
+
+<script>
+    // Tab switching logic
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            // Remove active from all buttons
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            // Hide all content and show selected
+            tabContents.forEach(content => content.classList.remove('active-content'));
+            document.getElementById(tabId).classList.add('active-content');
+        });
+    });
+</script>
 </body>
 </html>
